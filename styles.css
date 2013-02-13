@@ -41,6 +41,11 @@ header {
   margin-top: 50px;
 }
 
+ul.tags {
+  margin: 0px;
+  padding: 0px;
+}
+
 ul.tags li {
   display: inline;
 }
