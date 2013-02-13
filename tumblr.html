@@ -133,6 +133,22 @@
                   {/block:Caption}
                 </div>
               {/block:Audio}
+              
+              <div class="post-info">
+                <div class="author"><a href="{PostAuthorURL}" target="_blank" alt="{PostAuthorTitle} - {PostAuthorURL}">{PostAuthorName}</a></div>
+                {block:Date} 
+                  <div class="date">{TimeAgo}</div>
+                {/block:Date}
+              </div>
+              {block:HasTags} 
+                <ul class="tags">
+                  {block:Tags}
+                    <li>
+                      <a href="{TagURL}" target="_blank" alt="{Tag}">#{Tag}</a>
+                    </li>
+                  {/block:Tags}
+                </ul>
+              {/block:HasTags}
             {/block:Posts}
           </div> <!-- /#posts -->
 
