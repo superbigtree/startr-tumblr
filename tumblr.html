@@ -14,6 +14,39 @@
     <link rel="stylesheet" type="text/css" href="http://superbigtree.com/startr-tumblr/styles.css" />
 
     <title>{Title}</title>
+    
+    <style>
+      .exact-date {
+        display: none;
+      }
+      
+      .post {
+        margin-bottom: 80px;
+      }
+      
+      .post-info {
+        border-top: 1px solid #ededed;
+        border-bottom: 1px solid #ededed;
+        padding: 10px;
+      }
+      
+      .post-info .author, .post-info .date{
+        margin-right: 10px;
+        display: inline-block;
+      }
+      
+      .tags {
+        font-size: 0.7em;
+      }
+      
+      .tags a {
+        color: #c3c3c3;
+      }
+      
+      .tags a:hover, .tag a:focus {
+        color: #444;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -31,29 +64,26 @@
         <div class="content-wrapper">
           
           <div id="posts">
-            {block:Posts}
-              {block:Text}
-                <div class="post text">
+              {block:Posts}
+              <div class="post {PostType} post-id-{PostID} {TagsAsClasses}">
+              
+                {block:Text}
                   {block:Title}
                     <h3><a href="{Permalink}">{Title}</a></h3>
                   {/block:Title}
 
                   {Body}
-                </div>
-              {/block:Text}
+                {/block:Text}
 
-              {block:Photo}
-                <div class="post photo">
+                {block:Photo}
                   <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
 
                   {block:Caption}
                     <div class="caption">{Caption}</div>
                   {/block:Caption}
-                </div>
-              {/block:Photo}
+                {/block:Photo}
 
-              {block:Panorama}
-                <div class="post panorama">
+                {block:Panorama}
                   {LinkOpenTag}
                     <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
                   {LinkCloseTag}
@@ -61,41 +91,33 @@
                   {block:Caption}
                     <div class="caption">{Caption}</div>
                   {/block:Caption}
-                </div>
-              {/block:Panorama}
+                {/block:Panorama}
 
-              {block:Photoset}
-                <div class="post photoset">
+                {block:Photoset}
                   {Photoset-500}
 
                   {block:Caption}
                     <div class="caption">{Caption}</div>
                   {/block:Caption}
-                </div>
-              {/block:Photoset}
+                {/block:Photoset}
 
-              {block:Quote}
-                <div class="post quote">
+                {block:Quote}
                   "{Quote}"
 
                   {block:Source}
                     <div class="source">{Source}</div>
                   {/block:Source}
-                </div>
-              {/block:Quote}
+                {/block:Quote}
 
-              {block:Link}
-                <div class="post link">
+                {block:Link}
                   <a href="{URL}" class="link" {Target}>{Name}</a>
 
                   {block:Description}
                     <div class="description">{Description}</div>
                   {/block:Description}
-                </div>
-              {/block:Link}
+                {/block:Link}
 
-              {block:Chat}
-                <div class="post chat">
+                {block:Chat}
                   {block:Title}
                     <h3><a href="{Permalink}">{Title}</a></h3>
                   {/block:Title}
@@ -111,45 +133,41 @@
                       </li>
                     {/block:Lines}
                   </ul>
-                </div>
-              {/block:Chat}
+                {/block:Chat}
 
-              {block:Video}
-                <div class="post video">
+                {block:Video}
                   {Video-500}
 
                   {block:Caption}
                     <div class="caption">{Caption}</div>
                   {/block:Caption}
-                </div>
-              {/block:Video}
+                {/block:Video}
 
-              {block:Audio}
-                <div class="post audio">
+                {block:Audio}
                   {AudioPlayerBlack}
 
                   {block:Caption}
                     <div class="caption">{Caption}</div>
                   {/block:Caption}
-                </div>
-              {/block:Audio}
+                {/block:Audio}
               
-              <div class="post-info">
-                <div class="author"><a href="{PostAuthorURL}" target="_blank" alt="{PostAuthorTitle} - {PostAuthorURL}">{PostAuthorName}</a></div>
-                {block:Date} 
-                  <div class="date">{TimeAgo}</div>
-                {/block:Date}
-              </div>
-              {block:HasTags} 
-                <ul class="tags">
-                  {block:Tags}
-                    <li>
-                      <a href="{TagURL}" target="_blank" alt="{Tag}">#{Tag}</a>
-                    </li>
-                  {/block:Tags}
-                </ul>
-              {/block:HasTags}
-            {/block:Posts}
+                <div class="post-info">
+                  <div class="author"><a href="{PostAuthorURL}" target="_blank" alt="{PostAuthorTitle} - {PostAuthorURL}">{PostAuthorName}</a></div>
+                  {block:Date} 
+                    <div class="date"><span class="time-ago">{TimeAgo}</span><span class="exact-date">{Month} {DayOfMonth}, {Year}</span></div>
+                  {/block:Date}
+                </div>
+                {block:HasTags} 
+                  <ul class="tags">
+                    {block:Tags}
+                      <li>
+                        <a href="{TagURL}" target="_blank" alt="{Tag}">#{Tag}</a>
+                      </li>
+                    {/block:Tags}
+                  </ul>
+                {/block:HasTags}
+              </div> <!-- /.post -->
+              {/block:Posts}
           </div> <!-- /#posts -->
 
           <div id="pagination">
@@ -171,8 +189,33 @@
     </div>
     <footer>
       <div class="container">
-        
+        {block:GroupMembers} 
+          <ul class="contributors">
+            <h3>Contributors:</h3>
+            {block:GroupMember}
+              <li class="contributor">
+                <a href="{GroupMemberURL}" target="_blank"><img src="{GroupMemberPortraitURL-16}" alt="{GroupMemberName}">{GroupMemberName}</a>
+              </li>
+            {/block:GroupMember}
+          </ul>
+        {/block:GroupMembers}
       </div>
     </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $('.date').hover(
+        function(){
+          $(this).children('.exact-date').show();
+          $(this).children('.time-ago').hide();
+        },
+        function(){
+          $(this).children('.exact-date').hide();
+          $(this).children('.time-ago').show();
+        }
+      );
+    });
+    </script>
   </body>
 </html>
