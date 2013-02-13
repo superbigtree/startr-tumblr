@@ -51,20 +51,7 @@ ul.tags li {
 }
 
 @media only screen and (min-width: 600px) {
-
-  html,
-  body,
-  input,
-  button,
-  select,
-  textarea {
-    font: 16px/26px "Helvetica Neue", Helvetica, arial, sans-serif;
-    color: #444;
-    -webkit-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-  }
-
-  .container {
+ .container {
     width: 540px;
   }
 }
